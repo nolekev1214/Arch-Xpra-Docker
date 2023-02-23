@@ -15,7 +15,8 @@ RUN yes | pacman -Syyu
 RUN yes | pacman -S wine lib32-mesa \
     git xterm xorg-server \
     pipewire-jack wireplumber xpra \
-    mesa-demos lib32-mesa mesa-utils
+    mesa-demos lib32-mesa mesa-utils \
+    rustup
 
 # Set up user account
 ENV HOME /home/build
@@ -26,12 +27,15 @@ WORKDIR $HOME
 USER build
 
 # Set up AUR and additional dependencies
+RUN rustup toolchain install stable
 RUN git clone https://aur.archlinux.org/yay.git && \
     cd yay && \
     makepkg -si --noconfirm && \
     cd .. && \
     rm -rf yay
 RUN yes | yay -S xpra-html5-git python-xdg dbus-x11
+RUN yes | yay -S rustlings sublime-text-4
+RUN git clone https://github.com/rust-lang/rustlings.git
 
 # Set environment variables
 ENV DISPLAY=:100
