@@ -40,6 +40,7 @@ RUN git clone https://github.com/rust-lang/rustlings.git
 # Set environment variables
 ENV DISPLAY=:100
 # ENV LIBGL_ALWAYS_SOFTWARE=true
+EXPOSE 8080
 
 # Launch final command
-CMD xpra start --bind-tcp=0.0.0.0:10000 --html=on --start=xterm --daemon=no ${DISPLAY}
+CMD xpra start --bind-tcp=0.0.0.0:8080 --html=on --start=xterm --daemon=no ${DISPLAY}

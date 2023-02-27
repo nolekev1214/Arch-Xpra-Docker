@@ -7,4 +7,4 @@ build:
 	docker build -t="$(TAG)" .
 
 run:
-	docker run -d -p 80:10000 $(TAG)
+	docker run -d -p 80:8080 $(TAG)
